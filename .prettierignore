@@ -1,0 +1,12 @@
+.prettierignore
+*.json
+*.lock
+*.pro
+**/.gradle
+/.idea
+**/__snapshots__/**
+/android
+/ios
+/node_modules
+/ios
+/android
