@@ -4,6 +4,7 @@ import { CurrencyItem } from '@/src/features/currencyList/components/CurrencyIte
 import { useCallback } from 'react';
 import { View } from 'react-native';
 import { EmptyView } from './EmptyView';
+import { Button } from '@/src/components/Button';
 
 type Props = {
   data: any[];
@@ -17,7 +18,11 @@ const renderEmptyView = () => <EmptyView message="I am empty." />;
 
 export const CurrencyListFragment = ({ data }: Props) => {
   const renderHeader = useCallback(() => {
-    return <View></View>;
+    return (
+      <View>
+        <Button label="test" onPress={() => {}} />
+      </View>
+    );
   }, []);
 
   return (
