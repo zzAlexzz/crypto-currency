@@ -3,6 +3,9 @@ import { CurrencyInfo } from '@/@types/CurrencyInfo';
 import { CurrencyItem } from '@/src/features/currencyList/components/CurrencyItem';
 import { EmptyView } from './EmptyView';
 import { CurrencyListHeader } from '@/src/features/currencyList/components/CurrencyListHeader';
+import { SearchBar } from '@/src/components/SearchBar';
+import { spacing } from '@/src/theme/tokens';
+import { StyleSheet } from 'react-native';
 
 type Props = {
   data: any[];
@@ -17,8 +20,10 @@ const renderEmptyView = () => <EmptyView message="I am empty." />;
 export const CurrencyListFragment = ({ data }: Props) => {
   return (
     <>
+      <SearchBar />
       <CurrencyListHeader />
       <FlashList<CurrencyInfo>
+        style={styles.list}
         data={data}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
@@ -28,3 +33,7 @@ export const CurrencyListFragment = ({ data }: Props) => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  list: { marginHorizontal: spacing.md },
+});
