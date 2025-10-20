@@ -1,34 +1,23 @@
-import { CurrencyInfo } from '@/@types/CurrencyInfo';
-import { FlashList } from '@shopify/flash-list';
-import { View, Text } from 'react-native';
 import { CurrencyListFragment } from '@/src/features/currencyList';
-
-const listA = [
-  { id: 'BTC', name: 'Bitcoin', symbol: 'BTC' },
-  { id: 'ETH', name: 'Ethereum', symbol: 'ETH' },
-  { id: 'XRP', name: 'XRP', symbol: 'XRP' },
-  { id: 'BCH', name: 'Bitcoin Cash', symbol: 'BCH' },
-  { id: 'LTC', name: 'Litecoin', symbol: 'LTC' },
-  { id: 'EOS', name: 'EOS', symbol: 'EOS' },
-  { id: 'BNB', name: 'Binance Coin', symbol: 'BNB' },
-  { id: 'LINK', name: 'Chainlink', symbol: 'LINK' },
-  { id: 'NEO', name: 'NEO', symbol: 'NEO' },
-  { id: 'ETC', name: 'Ethereum Classic', symbol: 'ETC' },
-  { id: 'ONT', name: 'Ontology', symbol: 'ONT' },
-  { id: 'CRO', name: 'Crypto.com Chain', symbol: 'CRO' },
-  { id: 'CUC', name: 'Cucumber', symbol: 'CUC' },
-  { id: 'USDC', name: 'USD Coin', symbol: 'USDC' },
-];
-const listB = [
-  { id: 'SGD', name: 'Singapore Dollar', symbol: '$', code: 'SGD' },
-  { id: 'EUR', name: 'Euro', symbol: '€', code: 'EUR' },
-  { id: 'GBP', name: 'British Pound', symbol: '£', code: 'GBP' },
-  { id: 'HKD', name: 'Hong Kong Dollar', symbol: '$', code: 'HKD' },
-  { id: 'JPY', name: 'Japanese Yen', symbol: '¥', code: 'JPY' },
-  { id: 'AUD', name: 'Australian Dollar', symbol: '$', code: 'AUD' },
-  { id: 'USD', name: 'United States Dollar', symbol: '$', code: 'USD' },
-];
+import { SearchBar } from '@/src/components/SearchBar';
+import { CurrencyListHeader } from '@/src/features/currencyList/components/CurrencyListHeader';
+import { useCurrencyStore } from '@/src/store/useCurrencyStore';
+import { useQuery } from '@tanstack/react-query';
+import { fetchCurrencyList } from '@/src/services/currencyService';
 
 export const DemoScreen = () => {
-  return <CurrencyListFragment data={listA} />;
+  const { dataSource } = useCurrencyStore();
+
+  const { data, isLoading } = useQuery({
+    queryKey: ['currencyList', dataSource],
+    queryFn: () => fetchCurrencyList(dataSource),
+  });
+
+  return (
+    <>
+      <SearchBar />
+      <CurrencyListHeader />
+      <CurrencyListFragment data={data ?? []} isLoading={isLoading} />
+    </>
+  );
 };
