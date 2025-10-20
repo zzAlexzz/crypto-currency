@@ -1,4 +1,6 @@
 import { Text, View, StyleSheet } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import { colors, spacing, typography } from '@/src/theme/tokens';
 
 type Props = {
   message: string;
@@ -6,13 +8,21 @@ type Props = {
 
 export const EmptyView = ({ message }: Props) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>{message}</Text>
+    <View style={styles.emptyContainer}>
+      <MaterialIcons name="folder-open" size={42} color={colors.placeholder} />
+      <Text style={styles.emptyText}>Empty</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 16 },
-  text: { fontSize: 16, color: '#888' },
+  emptyContainer: {
+    alignItems: 'center',
+    paddingVertical: spacing.lg,
+  },
+  emptyText: {
+    ...typography.body,
+    color: colors.placeholder,
+    marginTop: spacing.xs,
+  },
 });

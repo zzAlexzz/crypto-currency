@@ -1,9 +1,10 @@
 import { FlashList } from '@shopify/flash-list';
 import { CurrencyInfo } from '@/@types/CurrencyInfo';
-import { CurrencyItem } from '@/src/features/currencyList/components/CurrencyItem';
-import { EmptyView } from './EmptyView';
 import { spacing } from '@/src/theme/tokens';
 import { StyleSheet } from 'react-native';
+import { CurrencyItem } from '@/src/features/currencyList/components/CurrencyItem';
+import { LoadingSkeleton } from '@/src/features/currencyList/components/LoadingSkeleton';
+import { EmptyView } from '@/src/features/currencyList/components/EmptyView';
 
 type Props = {
   isLoading: boolean;
@@ -14,19 +15,29 @@ const keyExtractor = (item: CurrencyInfo) => item.id;
 
 const renderItem = ({ item }: { item: CurrencyInfo }) => <CurrencyItem name={item.name} symbol={item.symbol} code={item.code} />;
 
-const renderEmptyView = () => <EmptyView message="I am empty." />;
+export const CurrencyListFragment = ({ data, isLoading }: Props) => {
+  if (isLoading) return <LoadingSkeleton />;
 
-export const CurrencyListFragment = ({ data, isLoading }: Props) => (
-  <FlashList<CurrencyInfo>
-    style={styles.list}
-    data={data}
-    keyExtractor={keyExtractor}
-    renderItem={renderItem}
-    ListEmptyComponent={renderEmptyView}
-    //
-  />
-);
+  return (
+    <FlashList<CurrencyInfo>
+      keyExtractor={keyExtractor}
+      style={styles.list}
+      data={data}
+      renderItem={renderItem}
+      ListEmptyComponent={EmptyView}
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={[styles.listContentContainer, data.length === 0 && styles.emptyContentContainer]}
+    />
+  );
+};
 
 const styles = StyleSheet.create({
   list: { marginHorizontal: spacing.md },
+  listContentContainer: {
+    paddingVertical: spacing.md,
+  },
+  emptyContentContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',
+  },
 });

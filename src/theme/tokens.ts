@@ -13,6 +13,8 @@ export const colors = {
   // status colors
   success: '#1ECB7B',
   danger: '#FF5B5B',
+  // base
+  'black.100': '#EEEEEE',
 };
 
 export const radius = {
