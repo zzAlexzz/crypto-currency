@@ -1,6 +1,7 @@
 import { DemoScreen } from '@/src/screens/DemoScreen';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import { StyleSheet, View } from 'react-native';
+import { spacing } from '@/src/theme/tokens';
 
 export const App = () => {
   return (
@@ -12,15 +13,12 @@ export const App = () => {
         testID="app-screen"
         style={styles.safeAreaView}
       >
-        <View style={styles.container}>
-          <DemoScreen />
-        </View>
+        <DemoScreen />
       </SafeAreaView>
     </SafeAreaProvider>
   );
 };
 
 const styles = StyleSheet.create({
-  safeAreaView: { flex: 1 },
-  container: { flex: 1, marginHorizontal: 12 },
+  safeAreaView: { flex: 1, marginHorizontal: spacing.xl, marginTop: spacing.xl },
 });

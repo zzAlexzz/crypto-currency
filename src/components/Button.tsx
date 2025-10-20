@@ -1,30 +1,39 @@
-import { Pressable, Text, type PressableProps } from 'react-native';
+import { StyleSheet, Pressable, Text, type PressableProps } from 'react-native';
 import { useCallback } from 'react';
+import { colors, radius, spacing, typography } from '../theme/tokens';
 
 type Props = PressableProps & {
-  label: string;
+  title: string;
   onPress: Pick<PressableProps, 'onPress'>;
 };
 
-export const Button = ({ label, onPress }: Props) => {
-  const buttonStyles = useCallback(
-    ({ pressed }: { pressed: boolean }) => ({
-      opacity: pressed ? 0.6 : 1,
-      transform: [{ scale: pressed ? 0.97 : 1 }],
-      backgroundColor: '#007aff',
-      padding: 12,
-      borderRadius: 8,
-    }),
-    [],
-  );
+export const Button = ({ title, onPress }: Props) => {
+  const buttonStyles = useCallback(({ pressed }: { pressed: boolean }) => [styles.base, styles.filled, pressed && { opacity: 0.6 }], []);
 
   return (
-    <Pressable
-      // disabled={disabled || loading}
-      style={buttonStyles}
-      onPress={onPress}
-    >
-      <Text style={{ color: '#fff' }}>{label}</Text>
+    <Pressable onPress={onPress} style={buttonStyles}>
+      <Text style={[styles.text, styles.textFilled]} numberOfLines={1}>
+        {title}
+      </Text>
     </Pressable>
   );
 };
+
+const styles = StyleSheet.create({
+  base: {
+    height: 34,
+    paddingHorizontal: spacing.lg,
+    borderRadius: radius.full,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: spacing.sm,
+    marginBottom: spacing.sm,
+    borderWidth: 1,
+  },
+  filled: {
+    backgroundColor: colors.brandBlue,
+    borderColor: colors.brandBlue,
+  },
+  text: { ...typography.body },
+  textFilled: { color: '#fff', fontWeight: '600' as const },
+});
