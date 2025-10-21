@@ -8,7 +8,7 @@ type Props = {
 
 export const EmptyView = ({ message = 'Empty' }: Props) => {
   return (
-    <View style={styles.emptyContainer}>
+    <View testID="empty-view" style={styles.emptyContainer}>
       <MaterialIcons name="folder-open" size={42} color={colors.placeholder} />
       <Text style={styles.emptyText}>{message}</Text>
     </View>

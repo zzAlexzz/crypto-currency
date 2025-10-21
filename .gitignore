@@ -43,3 +43,6 @@ yarn-error.*
 
 # IDEA settings
 /.idea
+
+# testing
+/coverage/

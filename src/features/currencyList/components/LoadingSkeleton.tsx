@@ -4,7 +4,7 @@ import { radius, spacing } from '@/src/theme/tokens';
 
 export const LoadingSkeleton = () => {
   return (
-    <View style={[styles.list, styles.skeletonContainer]}>
+    <View testID="loading-skeleton" style={[styles.list, styles.skeletonContainer]}>
       {Array.from({ length: 8 }).map((_, index) => (
         <View key={`skeleton-${index}`} style={styles.skeletonRow}>
           <Skeleton style={styles.skeletonAvatar} />

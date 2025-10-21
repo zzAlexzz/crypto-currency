@@ -10,7 +10,7 @@
     "web": "expo start --web",
     "lint": "expo lint",
     "prebuild": "expo prebuild --clean",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "dependencies": {
     "@expo/vector-icons": "15.0.2",
@@ -55,9 +55,6 @@
     "prettier": "3.6.2",
     "react-test-renderer": "19.1.0",
     "typescript": "5.9.3"
-  },
-  "jest": {
-    "preset": "jest-expo"
   },
   "private": true
 }

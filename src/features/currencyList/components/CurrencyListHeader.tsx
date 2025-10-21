@@ -4,17 +4,16 @@ import { Button } from '@/src/components/Button';
 import { useCurrencyStore } from '@/src/store/useCurrencyStore';
 import { clearAllData, insertSampleCurrencyData } from '@/src/services/currencyService';
 import { sampleListA, sampleListB } from '@/src/utils/constants';
+import { useCallback } from 'react';
 
 export const CurrencyListHeader = () => {
   const { setDataSource, setResults } = useCurrencyStore();
 
-  const onClear = () => {
+  const onClear = useCallback(() => {
     clearAllData();
     setResults([]);
-  };
-  const onInsert = () => {
-    insertSampleCurrencyData(sampleListA, sampleListB);
-  };
+  }, [setResults]);
+  const onInsert = () => insertSampleCurrencyData(sampleListA, sampleListB);
   const onUseA = () => setDataSource('A');
   const onUseB = () => setDataSource('B');
   const onShowPurchasable = () => setDataSource('ALL');

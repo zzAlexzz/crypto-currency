@@ -8,7 +8,7 @@ type Props = {
 
 const _Skeleton = ({ style }: Props) => {
   return (
-    <View style={[style ?? styles.defaultView, styles.container]}>
+    <View testID="loading-skeleton" style={[style ?? styles.defaultView, styles.container]}>
       <View style={[styles.content, styles.opacity05]} />
     </View>
   );
