@@ -19,7 +19,7 @@ export const clearAllData = () => {
 
 export const fetchCurrencyList = (list: 'A' | 'B' | 'ALL'): Promise<CurrencyInfo[]> => {
   // MMKV is synchronous, but we use a Promise interface to support async chaining.
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     let data: CurrencyInfo[] | null = null;
     if (list === 'A') {
       data = getJSON<CurrencyInfo[]>(KEY_A);

@@ -6,13 +6,13 @@ type Props = {
   style?: StyleProp<ViewStyle>;
 };
 
-export const Skeleton = memo(({ style }: Props) => {
+const _Skeleton = ({ style }: Props) => {
   return (
     <View style={[style ?? styles.defaultView, styles.container]}>
       <View style={[styles.content, styles.opacity05]} />
     </View>
   );
-});
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -34,3 +34,5 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
 });
+
+export const Skeleton = memo(_Skeleton);

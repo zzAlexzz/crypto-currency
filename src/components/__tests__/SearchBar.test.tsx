@@ -1,7 +1,7 @@
 import React from 'react';
 import type { ReactTestInstance } from 'react-test-renderer';
 import { fireEvent, render } from '@testing-library/react-native';
-import { SearchBar } from '../SearchBar';
+import { SearchBar } from '@/src/features/currencyList/components/SearchBar';
 
 jest.mock('@expo/vector-icons', () => {
   const React = require('react');

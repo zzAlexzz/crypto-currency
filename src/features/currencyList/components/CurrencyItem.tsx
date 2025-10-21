@@ -8,7 +8,7 @@ interface Props {
   symbol: string;
   code?: string;
 }
-export const CurrencyItem = memo<Props>(({ name, symbol, code }) => (
+const _CurrencyItem = ({ name, symbol, code }: Props) => (
   <View style={styles.itemRow}>
     <View style={styles.itemAvatar} />
     <Text numberOfLines={1} style={styles.itemName}>
@@ -17,7 +17,7 @@ export const CurrencyItem = memo<Props>(({ name, symbol, code }) => (
     <Text style={styles.itemCode}>{code ?? symbol}</Text>
     <Feather name="chevron-right" size={18} color={colors.placeholder} style={styles.itemChevron} />
   </View>
-));
+);
 
 const styles = StyleSheet.create({
   row: { flexDirection: 'row', alignItems: 'center', padding: 12 },
@@ -53,3 +53,5 @@ const styles = StyleSheet.create({
     marginLeft: spacing.xs,
   },
 });
+
+export const CurrencyItem = memo(_CurrencyItem);

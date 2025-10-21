@@ -8,7 +8,7 @@ import { EmptyView } from '@/src/features/currencyList/components/EmptyView';
 import { useCurrencyStore } from '@/src/store/useCurrencyStore';
 import { useQuery } from '@tanstack/react-query';
 import { fetchCurrencyList } from '@/src/services/currencyService';
-import { filterAndSort } from '@/src/utils/filter';
+import { filterList } from '@/src/utils/filter';
 import { useEffect } from 'react';
 
 const keyExtractor = (item: CurrencyInfo) => item.id;
@@ -24,8 +24,8 @@ export const CurrencyListFragment = () => {
   });
 
   useEffect(() => {
-    setResults(filterAndSort(data ?? [], searchQuery));
-  }, [data, searchQuery]);
+    setResults(filterList(data ?? [], searchQuery));
+  }, [data, searchQuery, setResults]);
 
   if (isLoading) return <LoadingSkeleton />;
 

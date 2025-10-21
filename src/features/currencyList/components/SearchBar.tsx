@@ -1,5 +1,5 @@
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { BackHandler, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Feather, Ionicons } from '@expo/vector-icons';
 import { colors, radius, spacing } from '@/src/theme/tokens';
 import { useCurrencyStore } from '@/src/store/useCurrencyStore';
@@ -9,7 +9,7 @@ export const SearchBar: FC = () => {
   const [query, setQuery] = useState('');
   const [showCancel, setShowCancel] = useState(false);
 
-  const debounced = useDebounce(query, 300);
+  const debouncedQuery = useDebounce(query, 300);
   const setSearchQuery = useCurrencyStore((s) => s.setSearchQuery);
 
   const inputRef = useRef<TextInput>(null);
@@ -18,13 +18,26 @@ export const SearchBar: FC = () => {
   const handleFocus = () => setShowCancel(true);
   const handleCancel = useCallback(() => {
     setShowCancel(false);
+    setQuery('');
     inputRef?.current?.clear();
     inputRef?.current?.blur();
   }, []);
 
   useEffect(() => {
-    setSearchQuery(debounced);
-  }, [debounced]);
+    setSearchQuery(debouncedQuery);
+  }, [debouncedQuery, setSearchQuery]);
+
+  useEffect(() => {
+    const subscription = BackHandler.addEventListener('hardwareBackPress', () => {
+      if (query.length > 0) {
+        handleCancel();
+        return true;
+      }
+      return false;
+    });
+
+    return () => subscription.remove();
+  }, [handleCancel, query.length]);
 
   return (
     <View style={styles.container}>
@@ -78,5 +91,5 @@ const styles = StyleSheet.create({
   input: { flex: 1, color: colors.textPrimary, paddingVertical: 0 },
   clearBtn: { marginLeft: spacing.sm },
   cancelBtn: { marginLeft: spacing.sm, paddingHorizontal: spacing.xs, paddingVertical: spacing.xs },
-  cancelText: { color: colors.brandBlue, fontSize: 16 },
+  cancelText: { color: colors.textSecondary, fontSize: 16 },
 });

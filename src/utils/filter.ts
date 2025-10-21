@@ -17,6 +17,6 @@ export function matches(info: CurrencyInfo, raw: string) {
   return !!symbol.startsWith(query);
 }
 
-export function filterAndSort(list: CurrencyInfo[], query: string) {
+export function filterList(list: CurrencyInfo[], query: string) {
   return list.filter((item) => matches(item, query));
 }

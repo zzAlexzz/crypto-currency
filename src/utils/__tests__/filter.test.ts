@@ -1,4 +1,4 @@
-import { filterAndSort, matches } from '../filter';
+import { filterList, matches } from '../filter';
 import { CurrencyInfo } from '@/@types/CurrencyInfo';
 
 const makeCurrency = (overrides: Partial<CurrencyInfo>): CurrencyInfo => ({
@@ -63,13 +63,13 @@ describe('filterAndSort', () => {
   ];
 
   test('filters the list using matches logic', () => {
-    const result = filterAndSort(currencies, 'coin');
+    const result = filterList(currencies, 'coin');
 
     expect(result).toEqual([currencies[2]]);
   });
 
   test('returns the original list when the query is empty', () => {
-    const result = filterAndSort(currencies, '');
+    const result = filterList(currencies, '');
 
     expect(result).toEqual(currencies);
   });
