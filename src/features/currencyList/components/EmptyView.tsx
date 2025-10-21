@@ -6,7 +6,7 @@ type Props = {
   message?: string;
 };
 
-export const EmptyView = ({ message = 'Empty' }: Props) => {
+export const EmptyView = ({ message = 'No Results' }: Props) => {
   return (
     <View testID="empty-view" style={styles.emptyContainer}>
       <MaterialIcons name="folder-open" size={42} color={colors.placeholder} />

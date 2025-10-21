@@ -14,7 +14,7 @@ describe('EmptyView', () => {
   it('shows the default message when no message is provided', () => {
     const { getByText } = render(<EmptyView />);
 
-    expect(getByText('Empty')).toBeTruthy();
+    expect(getByText('No Results')).toBeTruthy();
   });
 
   it('renders a custom message when supplied', () => {

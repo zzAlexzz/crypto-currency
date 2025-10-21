@@ -37,6 +37,7 @@ export const CurrencyListFragment = () => {
       renderItem={renderItem}
       ListEmptyComponent={EmptyView}
       showsVerticalScrollIndicator={false}
+      // FlashList needs predictable padding when the empty state is visible to center the placeholder gracefully.
       contentContainerStyle={[styles.listContentContainer, results.length === 0 && styles.emptyContentContainer]}
     />
   );

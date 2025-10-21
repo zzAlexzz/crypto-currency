@@ -3,6 +3,7 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 import { mmkv } from '@/src/services/mmkv';
 import { CurrencyInfo } from '@/@types/CurrencyInfo';
 
+// Bridge MMKV's imperative API into a shape Zustand's persist middleware understands.
 const mmkvStorage = {
   setItem: (k: string, v: string) => mmkv.set(k, v),
   getItem: (k: string) => mmkv.getString(k) ?? null,

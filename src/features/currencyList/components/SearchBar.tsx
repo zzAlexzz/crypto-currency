@@ -17,6 +17,7 @@ export const SearchBar: FC = () => {
   const handleClear = () => setQuery('');
   const handleFocus = () => setShowCancel(true);
   const handleCancel = useCallback(() => {
+    // closing hides the cancel action and resets both UI and store state.
     setShowCancel(false);
     setQuery('');
     inputRef?.current?.clear();

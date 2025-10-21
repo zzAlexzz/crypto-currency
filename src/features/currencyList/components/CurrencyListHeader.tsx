@@ -6,13 +6,19 @@ import { clearAllData, insertSampleCurrencyData } from '@/src/services/currencyS
 import { sampleListA, sampleListB } from '@/src/utils/constants';
 import { useCallback } from 'react';
 
+/**
+ * Renders the demo control panel that drives the underlying local datasets.
+ * Each action mirrors one of the requirements defined for the showcase activity.
+ */
 export const CurrencyListHeader = () => {
   const { setDataSource, setResults } = useCurrencyStore();
 
+  // Clearing the store ensures there is no stale query result leftover in the FlashList.
   const onClear = useCallback(() => {
     clearAllData();
     setResults([]);
   }, [setResults]);
+  // Inserts both sample datasets so subsequent list toggles show immediate results.
   const onInsert = () => insertSampleCurrencyData(sampleListA, sampleListB);
   const onUseA = () => setDataSource('A');
   const onUseB = () => setDataSource('B');
