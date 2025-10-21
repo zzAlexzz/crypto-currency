@@ -1,21 +1,30 @@
-import { FC, useCallback, useRef, useState } from 'react';
+import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Feather, Ionicons } from '@expo/vector-icons';
-import { colors, radius, spacing } from '../theme/tokens';
+import { colors, radius, spacing } from '@/src/theme/tokens';
+import { useCurrencyStore } from '@/src/store/useCurrencyStore';
+import { useDebounce } from '@/src/hooks/useDebounce';
 
 export const SearchBar: FC = () => {
-  const [input, setInput] = useState('');
+  const [query, setQuery] = useState('');
   const [showCancel, setShowCancel] = useState(false);
+
+  const debounced = useDebounce(query, 300);
+  const setSearchQuery = useCurrencyStore((s) => s.setSearchQuery);
 
   const inputRef = useRef<TextInput>(null);
 
-  const handleClear = () => setInput('');
+  const handleClear = () => setQuery('');
   const handleFocus = () => setShowCancel(true);
   const handleCancel = useCallback(() => {
     setShowCancel(false);
     inputRef?.current?.clear();
     inputRef?.current?.blur();
   }, []);
+
+  useEffect(() => {
+    setSearchQuery(debounced);
+  }, [debounced]);
 
   return (
     <View style={styles.container}>
@@ -26,13 +35,13 @@ export const SearchBar: FC = () => {
           style={styles.input}
           placeholder="search"
           placeholderTextColor={colors.placeholder}
-          value={input}
-          onChangeText={setInput}
+          value={query}
+          onChangeText={setQuery}
           autoCorrect={false}
           returnKeyType="search"
           onFocus={handleFocus}
         />
-        {!!input ? (
+        {!!query ? (
           <Pressable testID="close-btn" onPress={handleClear} hitSlop={8} style={styles.clearBtn}>
             <Ionicons name="close" size={18} color={colors.placeholder} />
           </Pressable>

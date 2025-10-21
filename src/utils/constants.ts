@@ -25,4 +25,4 @@ export const sampleListB = [
   { id: 'USD', name: 'United States Dollar', symbol: '$', code: 'USD', canPurchase: true },
 ];
 
-export const LOADING_TIME_MS = 1000;
+export const LOADING_TIME_MS = 500;
