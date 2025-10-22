@@ -9,6 +9,13 @@ A React Native (Expo) showcase that demonstrates how a reusable `CurrencyListFra
 - Search bar with debounced queries, close button, and Android back handling to cancel the search gracefully.
 - All IO (database simulation via MMKV) is surfaced through async helpers and consumed with React Query to keep work off the UI thread.
 
+## Environment Requirements
+- Node.js 18 LTS or newer (Expo SDK 54 requires Node 18+)
+- Yarn 1.22 (Classic) for dependency management
+- Expo CLI 7 (available via `npx expo`) in your global PATH
+- Xcode 15+ with Command Line Tools for iOS simulator builds (macOS only)
+- Android Studio Hedgehog or newer with Android SDK 34 for Android emulator runs
+
 ## Getting Started
 ```bash
 yarn install
