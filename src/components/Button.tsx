@@ -1,17 +1,21 @@
-import { StyleSheet, Pressable, Text, type PressableProps } from 'react-native';
+import { Pressable, type PressableProps, StyleSheet, Text } from 'react-native';
 import { useCallback } from 'react';
 import { colors, radius, spacing, typography } from '../theme/tokens';
 
 type Props = PressableProps & {
   title: string;
-  onPress: Pick<PressableProps, 'onPress'>;
+  onPress: PressableProps['onPress'];
+  selected?: boolean;
 };
 
-export const Button = ({ title, onPress }: Props) => {
-  const buttonStyles = useCallback(({ pressed }: { pressed: boolean }) => [styles.base, styles.filled, pressed && { opacity: 0.6 }], []);
+export const Button = ({ title, onPress, style, selected = false, ...rest }: Props) => {
+  const buttonStyles = useCallback(
+    ({ pressed }: { pressed: boolean }) => [styles.base, styles.filled, selected && styles.selected, pressed && styles.pressed],
+    [selected],
+  );
 
   return (
-    <Pressable onPress={onPress} style={buttonStyles}>
+    <Pressable onPress={onPress} style={buttonStyles} {...rest}>
       <Text style={[styles.text, styles.textFilled]} numberOfLines={1}>
         {title}
       </Text>
@@ -33,6 +37,13 @@ const styles = StyleSheet.create({
   filled: {
     backgroundColor: colors.brandBlue,
     borderColor: colors.brandBlue,
+  },
+  selected: {
+    borderColor: colors['black.100'],
+    borderWidth: 2,
+  },
+  pressed: {
+    opacity: 0.6,
   },
   text: { ...typography.body },
   textFilled: { color: '#fff', fontWeight: '600' as const },

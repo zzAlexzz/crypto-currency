@@ -55,7 +55,7 @@ describe('matches', () => {
   });
 });
 
-describe('filterAndSort', () => {
+describe('filter function', () => {
   const currencies: CurrencyInfo[] = [
     makeCurrency({ id: 'btc', name: 'Bitcoin', symbol: 'BTC' }),
     makeCurrency({ id: 'eth', name: 'Ethereum', symbol: 'ETH' }),

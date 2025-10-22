@@ -11,7 +11,7 @@ import { useCallback } from 'react';
  * Each action mirrors one of the requirements defined for the showcase activity.
  */
 export const CurrencyListHeader = () => {
-  const { setDataSource, setResults } = useCurrencyStore();
+  const { dataSource, setDataSource, setResults } = useCurrencyStore();
 
   // Clearing the store ensures there is no stale query result leftover in the FlashList.
   const onClear = useCallback(() => {
@@ -29,9 +29,9 @@ export const CurrencyListHeader = () => {
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: spacing.md }}>
         <Button title="Clear" onPress={onClear} />
         <Button title="Insert" onPress={onInsert} />
-        <Button title="Crypto" onPress={onUseA} />
-        <Button title="Fiat" onPress={onUseB} />
-        <Button title="Purchasable" onPress={onShowPurchasable} />
+        <Button title="Crypto" onPress={onUseA} selected={dataSource === 'A'} />
+        <Button title="Fiat" onPress={onUseB} selected={dataSource === 'B'} />
+        <Button title="Purchasable" onPress={onShowPurchasable} selected={dataSource === 'ALL'} />
       </ScrollView>
     </View>
   );
